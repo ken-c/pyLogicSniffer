@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''UART analysis tool for pyLogicSniffer.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 
@@ -176,7 +175,7 @@ class AnalyzerDialog (wx.Dialog):
 		
 		self.SetValue (settings)
 		
-		gs = wx.FlexGridSizer (6, 2)
+		gs = wx.FlexGridSizer (6, 2, 0, 0)
 		def add_labeled_ctrl (label, ctrl):
 			'''Add a control to gs with a preceding StaticText label.'''
 			gs.Add (wx.StaticText (self, wx.ID_ANY, label), 0, wx.ALIGN_CENTER_VERTICAL)

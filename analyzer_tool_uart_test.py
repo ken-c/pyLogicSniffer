@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''Unit tests for pyLogicSniffer UART analysis tool.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 

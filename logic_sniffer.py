@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-# -*- coding: UTF-8 -*-
 '''Client display program for Open Bench Logic Sniffer 
 and other SUMP analyzers.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 This file is part of pyLogicSniffer.
 
 pyLogicSniffer is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
@@ -24,7 +23,7 @@ from logic_sniffer_classes import TraceData
 from logic_sniffer_dialogs import BookLabelDialog, LabelDialog, TimeScaleDialog, TracePropertiesDialog, ZoomDialog
 import logic_sniffer_save
 
-time_units_text = ['nS', u'μS', 'mS', 'S']
+time_units_text = ['nS', 'uS', 'mS', 'S']
 time_units_values = [1000000000, 1000000, 1000, 1]
 
 # File dialog wildcard string for SUMP saved settings ..
@@ -296,8 +295,8 @@ class TraceWindow (wx.Panel):
 		self.graphs = TraceGraphs (self)
 		self.trace_legend = TraceLegend (self, self.graphs.TRACE_MAX, self.graphs.TRACE_HEIGHT, self.legends)
 		self.time_legend = TimeLegend (self)
-		
-		ts = wx.FlexGridSizer (2, 2)
+
+		ts = wx.FlexGridSizer (2, 2, 0, 0)
 		ts.AddGrowableRow (1)
 		ts.AddGrowableCol (1)
 		ts.Add ((0,0), 0, 0)
@@ -552,7 +551,7 @@ class MyFrame (wx.Frame):
 	def OnBookRClick (self, evt):
 		'''Handle right-click on one of the notebook's page tabs.'''
 		ctrl = evt.GetEventObject()
-		page, flags = ctrl.HitTest ((evt.m_x, evt.m_y))
+		page, flags = ctrl.HitTest ((evt.GetX(), evt.GetY()))
 		if page != wx.NOT_FOUND:
 			d = BookLabelDialog (self, ctrl.GetPageText (page))
 			if d.ShowModal() == wx.ID_OK:
@@ -687,8 +686,8 @@ class MyFrame (wx.Frame):
 	def OnGraphMouseMotion (self, evt):
 		if evt.Moving():
 			graphs = evt.GetEventObject()
-			sample = graphs.CalcXSample (evt.m_x)
-			sample_time = graphs.CalcXSampleTime (evt.m_x)
+			sample = graphs.CalcXSample (evt.GetX())
+			sample_time = graphs.CalcXSampleTime (evt.GetX())
 			if sample_time is not None:
 				wx.CallAfter (self.GetStatusBar().SetStatusText, '%d -- %g%s' % (sample, sample_time, time_units_text[1]))
 		evt.Skip()

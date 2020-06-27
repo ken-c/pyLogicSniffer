@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''TWI (aka I²C) analysis tool for pyLogicSniffer.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 
@@ -38,7 +37,7 @@ class AnalyzerDialog (wx.Dialog):
 			self.SetValue (settings)
 			
 		ts = wx.BoxSizer (wx.VERTICAL)
-		gs = wx.FlexGridSizer (7, 2)
+		gs = wx.FlexGridSizer (7, 2, 0, 0)
 		gs.Add (wx.StaticText (self, wx.ID_ANY, 'SDA'), 0, wx.ALIGN_CENTER_VERTICAL)
 		gs.Add (self.data_ctrl, 1, 0)
 		gs.Add (wx.StaticText (self, wx.ID_ANY, 'SCL'), 0, wx.ALIGN_CENTER_VERTICAL)

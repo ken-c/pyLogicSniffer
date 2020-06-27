@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''Utilities for PyLogicSniffer analysis tools.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 

@@ -1,4 +1,3 @@
-# -*- coding: UTF-8 -*-
 '''SPI analysis tool for pyLogicSniffer.
 Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
@@ -46,7 +45,7 @@ class AnalyzerDialog (wx.Dialog):
 		if settings is not None:
 			self.SetValue (settings)
 			
-		gs = wx.FlexGridSizer (7, 2)
+		gs = wx.FlexGridSizer (7, 2, 0, 0)
 		gs.Add (wx.StaticText (self, wx.ID_ANY, 'SCK'), 0, wx.ALIGN_CENTER_VERTICAL)
 		gs.Add (self.clock_ctrl, 1, 0)
 		gs.Add (wx.StaticText (self, wx.ID_ANY, 'MOSI'), 0, wx.ALIGN_CENTER_VERTICAL)

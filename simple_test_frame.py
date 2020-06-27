@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''Frame class to run a dialog for testing.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 

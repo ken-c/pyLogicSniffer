@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''Configuration dialog for a SUMP logic-analyzer device.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 
@@ -72,7 +71,7 @@ sampling_rate_settings = LabelledValues (
 	]
 	)
 time_unit_settings = LabelledValues (
-	['samples', 'seconds', 'msec', u'μsec', 'nsec'],
+	['samples', 'seconds', 'msec', 'usec', 'nsec'],
 	[0, 1, 1000, 1000000, 1000000000]
 	)
 trigger_action_settings = LabelledValues (['Capture', 'Next Level'], [1, 0])
@@ -185,7 +184,7 @@ class SumpTriggerPanel (wx.Panel):
 		# controls for trigger masks and values
 		self.mask_controls = [wx.CheckBox (self, -1) for i in xrange (32)]	# check boxes for bits 0..31
 		self.value_controls = [wx.CheckBox (self, -1) for i in xrange (32)]	# check boxes for bits 0..31
-		gs = wx.FlexGridSizer (3, 33)
+		gs = wx.FlexGridSizer (3, 33, 0, 0)
 		gs.Add ((0,0))	# empty corner over and beside legends
 		for i in xrange (31,-1,-1):		# column legends
 			gs.Add (wx.StaticText (self, -1, str (i)), 0, wx.ALIGN_CENTER)
@@ -340,7 +339,7 @@ class SumpDialog (wx.Dialog):
 		self.demux_ctl = wx.CheckBox (self, -1)
 		self.rle_ctl = wx.CheckBox (self, -1)
 		hs = wx.BoxSizer (wx.HORIZONTAL)
-		for label, ctl in zip (('0‥7', '8‥15', '16‥23', '24‥31'), self.group_controls):
+		for label, ctl in zip (('0-7', '8-15', '16-23', '24-31'), self.group_controls):
 			labelled_ctl (hs, label, ctl)
 		labelled_ctl (anasizer, 'Channel Group   ', hs)
 		hs = wx.BoxSizer (wx.HORIZONTAL)
@@ -385,7 +384,7 @@ class SumpDialog (wx.Dialog):
 		capture_button = wx.Button (self, ID_CAPTURE, 'C&apture')
 		capture_button.SetDefault()
 		top_sizer.Add (capture_button, 0, wx.ALIGN_CENTER)
-		top_sizer.Add (self.CreateButtonSizer (wx.OK|wx.CANCEL|wx.HELP), 0, wx.EXPAND|wx.ALIGN_CENTER)
+		top_sizer.Add (self.CreateButtonSizer (wx.OK|wx.CANCEL|wx.HELP), 0, wx.ALIGN_CENTER)
 		
 		#~ wx.EVT_MENU (self, wx.ID_HELP,  self.OnHelp)
 		wx.EVT_BUTTON (self, wx.ID_HELP,  self.OnHelp)

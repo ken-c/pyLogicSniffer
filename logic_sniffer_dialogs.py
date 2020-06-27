@@ -1,6 +1,5 @@
-# -*- coding: UTF-8 -*-
 '''Edit trace legends for pyLogicSniffer.
-Copyright © 2011, Mel Wilson mwilson@melwilsonsoftware.ca
+Copyright 2011, Mel Wilson mwilson@melwilsonsoftware.ca
 
 This file is part of pyLogicSniffer.
 
@@ -20,7 +19,7 @@ This file is part of pyLogicSniffer.
 
 import wx
 
-time_units_text = ['nS', 'μS', 'mS', 'S']
+time_units_text = ['nS', 'uS', 'mS', 'S']
 time_units_values = [1000000000, 1000000, 1000, 1]
 
 class SimpleValidator (wx.PyValidator):
@@ -75,7 +74,7 @@ class LabelDialog (wx.Dialog):
 		ic = list (enumerate (self.label_ctls))
 		hs = wx.BoxSizer (wx.HORIZONTAL)
 		for j in xrange (0, 32, 8):
-			gs = wx.FlexGridSizer (8, 2)
+			gs = wx.FlexGridSizer (8, 2, 0, 0)
 			gs.AddGrowableCol (1)
 			for k  in xrange (j, j+8):
 				i, ctl = ic[k]
