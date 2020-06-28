@@ -106,7 +106,7 @@ class TimeLegend (wx.Panel):
 		w = sz.GetWidth()
 		h = sz.GetHeight()
 		w *= self.zoom
-		self._bitmap = wx.EmptyBitmap (w, h)
+		self._bitmap = wx.Bitmap (w, h)
 		dc = wx.MemoryDC (self._bitmap)
 		self._draw_legend (dc, w, h)
 		del dc
@@ -146,7 +146,7 @@ class TraceLegend (wx.Panel):
 		self.captions = []
 		for i in xrange (trace_max):
 			self.captions.append (wx.StaticText (self, -1, str (i), pos=(0, 5+i*trace_height)))
-		w = max (c.GetSizeTuple()[0] for c in self.captions)
+		w = max (c.GetSize().GetWidth() for c in self.captions)
 		self.SetMinSize ((w, -1))
 		
 	def ScrollToTrace (self, trace):
@@ -158,7 +158,7 @@ class TraceLegend (wx.Panel):
 	def SetLegend (self, trace, legend):
 		self.legends[trace] = legend
 		self.captions[trace].SetLabel ('%d %s' % (trace, legend))
-		w = max (c.GetSizeTuple()[0] for c in self.captions)
+		w = max (c.GetSize().GetWidth() for c in self.captions)
 		self.SetMinSize ((w, -1))
 
 class TraceGraphs (wx.Window):
@@ -242,7 +242,7 @@ class TraceGraphs (wx.Window):
 		if self.data is not None:
 			width = self.data.read_count * self.scale * self.zoom
 			height = self.TRACE_HEIGHT * self.TRACE_MAX
-			self._bitmap = wx.EmptyBitmap (width, height)
+			self._bitmap = wx.Bitmap (width, height)
 			dc = wx.MemoryDC (self._bitmap)
 			self._draw_traces (dc)
 			del dc
@@ -349,7 +349,7 @@ class TraceWindow (wx.Panel):
 		return self.graphs.data
 		
 	def OnGraphRightClick (self, evt):
-		trace = evt.m_y / self.graphs.TRACE_HEIGHT + self.tracescroll
+		trace = evt.GetY() / self.graphs.TRACE_HEIGHT + self.tracescroll
 		if 0 <= trace < self.graphs.TRACE_MAX:
 			d = TracePropertiesDialog (self, trace, self.legends.get (trace, ''))
 			if wx.ID_OK == d.ShowModal():
@@ -454,7 +454,7 @@ class MyFrame (wx.Frame):
 			menubar = self.GetMenuBar()
 			tool_menu = menubar.GetMenu (menubar.FindMenu ('&Tools'))
 			tool_menu.Append (mid, module.tool_menu_string)
-			wx.EVT_MENU (self, mid, self.OnToolSelection)
+			self.Bind(wx.EVT_MENU, self.OnToolSelection, id=mid)
 		
 	def _main_menu (self):
 		'''Quasi-boilerplate to create the main menu.'''
@@ -465,7 +465,7 @@ class MyFrame (wx.Frame):
 			if itemid == -1:
 				itemid = wx.NewId()
 			menu.Append (itemid, item)
-			wx.EVT_MENU (self, itemid, handler)
+			self.Bind(wx.EVT_MENU, handler, id=itemid)
 			
 		filemenu = wx.Menu()
 		menubar.Append (filemenu, '&File')
@@ -842,7 +842,7 @@ if __name__ == '__main__':
 	except SerialException:
 		log_error ('Error opening SUMP interface: %r' % (sys.exc_info(),))
 		sniffer = None
-	if sniffer is not None:
+	if sniffer:
 		if verbose_flag:
 			sniffer.set_logfile (sys.stderr)
 		sniffer.reset()
@@ -856,4 +856,5 @@ if __name__ == '__main__':
 	app = MyApp (0)
 	if verbose_flag:	print 'Starting loop'
 	app.MainLoop()
-	sniffer.close()
+        if sniffer:
+	        sniffer.close()

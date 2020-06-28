@@ -386,8 +386,7 @@ class SumpDialog (wx.Dialog):
 		top_sizer.Add (capture_button, 0, wx.ALIGN_CENTER)
 		top_sizer.Add (self.CreateButtonSizer (wx.OK|wx.CANCEL|wx.HELP), 0, wx.ALIGN_CENTER)
 		
-		#~ wx.EVT_MENU (self, wx.ID_HELP,  self.OnHelp)
-		wx.EVT_BUTTON (self, wx.ID_HELP,  self.OnHelp)
+		self.Bind(wx.EVT_BUTTON, self.OnHelp, id=wx.ID_HELP)
 		capture_button.Bind (wx.EVT_BUTTON, self.OnCapture)
 		self.trigger_enable_ctl.Bind (wx.EVT_RADIOBOX, self.OnTriggerEnableChange)
 		
@@ -547,7 +546,7 @@ class DocumentationWindow (wx.Window):
 
 
 #===========================================================
-class SimpleValidator (wx.PyValidator):
+class SimpleValidator (wx.Validator):
 	'''Validators with defaults we can use.'''
 	def Clone (self):
 		return self.__class__()
