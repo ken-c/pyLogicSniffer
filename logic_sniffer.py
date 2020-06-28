@@ -64,8 +64,8 @@ class TimeLegend (wx.Panel):
 		if self._bitmap is not None:
 			dc = wx.ClientDC (self)
 			mdc = wx.MemoryDC (self._bitmap)
-			w, h = self.GetClientSizeTuple ()
-			dc.Blit (0, 0, w, h, mdc, self.sample_offset, 0)
+			sz = self.GetClientSize()
+			dc.Blit (0, 0, sz.GetWidth(), sz.GetHeight(), mdc, self.sample_offset, 0)
 			
 	def OnSize (self, evt):
 		if self.data is not None:
@@ -102,7 +102,9 @@ class TimeLegend (wx.Panel):
 				place_text ('0', data.read_count - data.delay_count)
 		
 	def ReDraw (self):
-		w, h = self.GetClientSizeTuple()
+		sz = self.GetClientSize()
+		w = sz.GetWidth()
+		h = sz.GetHeight()
 		w *= self.zoom
 		self._bitmap = wx.EmptyBitmap (w, h)
 		dc = wx.MemoryDC (self._bitmap)
@@ -112,7 +114,7 @@ class TimeLegend (wx.Panel):
 		
 	def SetData (self, data):
 		self.data = data
-		width, height = self.GetClientSizeTuple ()
+		width = self.GetClientSize().GetWidth()
 		self.scale = float (width) / self.data.read_count
 		self.zoom = 1
 		self.sample_scroll = 0
@@ -199,8 +201,8 @@ class TraceGraphs (wx.Window):
 		if self._bitmap is not None:
 			dc = wx.ClientDC (self)
 			mdc = wx.MemoryDC (self._bitmap)
-			w, h = self.GetClientSizeTuple ()
-			dc.Blit (0, 0, w, h, mdc, self.sample_offset, self.trace_offset)
+			sz = self.GetClientSize()
+			dc.Blit (0, 0, sz.GetWidth(), sz.GetHeight(), mdc, self.sample_offset, self.trace_offset)
 			
 	def OnSize (self, evt):
 		if self.data is not None:
@@ -260,7 +262,7 @@ class TraceGraphs (wx.Window):
 	def SetData (self, data):
 		self.data = data
 		self.zoom =1
-		width, height = self.GetClientSizeTuple ()
+		width = self.GetClientSize().GetWidth()
 		self.scale = float (width) / self.data.read_count
 		self._set_sample_offset()
 		self.tracedata = [None]*self.TRACE_MAX
