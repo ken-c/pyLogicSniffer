@@ -490,8 +490,8 @@ class MyFrame (wx.Frame):
 		append_bound_item (viewmenu, self.OnViewLegend, '&Legend')	# edit trace legends
 		append_bound_item (viewmenu, self.OnViewTimeScale, '&Time Scale ...')	# edit time scale units
 		append_bound_item (viewmenu, self.OnViewZoom, '&Zoom ...')
-		append_bound_item (viewmenu, self.OnViewZoomIn, 'Zoom &In')
-		append_bound_item (viewmenu, self.OnViewZoomOut, 'Zoom &Out')
+		append_bound_item (viewmenu, self.OnViewZoomIn, 'Zoom &In\tctrl-+')
+		append_bound_item (viewmenu, self.OnViewZoomOut, 'Zoom &Out\tctrl--')
 		
 		devicemenu = wx.Menu()
 		menubar.Append (devicemenu, '&Device')
